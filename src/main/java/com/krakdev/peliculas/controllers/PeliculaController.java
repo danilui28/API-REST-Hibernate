@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.krakdev.peliculas.entidades.Pelicula;
@@ -84,6 +85,26 @@ public class PeliculaController {
 		}
 
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/genero")
+	public ResponseEntity<List<Pelicula>> buscarPorGenero(
+			@RequestParam String genero) {
+
+		List<Pelicula> peliculas =
+				servicioPelicula.buscarPorGenero(genero);
+
+		return ResponseEntity.ok(peliculas);
+	}
+
+	@GetMapping("/disponible")
+	public ResponseEntity<List<Pelicula>> buscarPorDisponible(
+			@RequestParam boolean disponible) {
+
+		List<Pelicula> peliculas =
+				servicioPelicula.buscarPorDisponible(disponible);
+
+		return ResponseEntity.ok(peliculas);
 	}
 
 }

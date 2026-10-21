@@ -40,6 +40,7 @@ public class ServicioPelicula {
 		pelicula.setGenero(datos.getGenero());
 		pelicula.setDuracion(datos.getDuracion());
 		pelicula.setDisponible(datos.isDisponible());
+		pelicula.setCalificacion(datos.getCalificacion());
 
 		return peliculaRepository.save(pelicula);
 	}
@@ -53,5 +54,13 @@ public class ServicioPelicula {
 		peliculaRepository.deleteById(id);
 
 		return true;
+	}
+	
+	public List<Pelicula> buscarPorGenero(String genero) {
+		return peliculaRepository.findByGenero(genero);
+	}
+
+	public List<Pelicula> buscarPorDisponible(boolean disponible) {
+		return peliculaRepository.findByDisponible(disponible);
 	}
 }
